@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private StockAdapter adapter;
 
     @Override
-    public void onClick(String symbol, String history) {
+    public void onClick(String symbol, String name, String history) {
         Timber.d("Symbol clicked: %s", symbol);
 
         //Toast.makeText(context, symbol, Toast.LENGTH_SHORT).show();
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Bundle extras = new Bundle();
         extras.putString("SYMBOL",symbol);
         extras.putString("HISTORY", history);
+        extras.putString("NAME", name);
         detailIntent.putExtras(extras);
         startActivity(detailIntent);
     }
