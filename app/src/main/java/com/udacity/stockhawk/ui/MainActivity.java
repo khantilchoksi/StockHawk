@@ -1,7 +1,9 @@
 package com.udacity.stockhawk.ui;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -10,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -72,6 +75,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setRefreshing(true);
+
+//        //LocalBroadcast Management
+//        fab.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                // TODO Auto-generated method stub
+//                //Register MessageService in Manifest to work
+//                startService(new Intent(MainActivity.this, MessageService.class));
+//            }
+//        });
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                mMessageReceiver, new IntentFilter("custom-event-name"));
+
         onRefresh();
 
         QuoteSyncJob.initialize(this);
@@ -91,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 getContentResolver().delete(Contract.Quote.makeUriForStock(symbol), null, null);
             }
         }).attachToRecyclerView(recyclerView);
+
 
 
     }
@@ -122,6 +140,37 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         } else {
             error.setVisibility(View.GONE);
         }
+    }
+
+    // Our handler for received Intents. This will be called whenever an Intent
+    // with an action named "custom-event-name" is broadcasted.
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // TODO Auto-generated method stub
+            // Get extra data included in the Intent
+            String message = intent.getStringExtra("message");
+            Timber.d("receiver _ Got message: " + message);
+            Toast.makeText(MainActivity.this,message,Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    @Override
+    protected void onPause() {
+        // Unregister LocalBroadcasr Receiver since the activity is paused.
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(
+                mMessageReceiver);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        // Register to receive messages.
+        // We are registering an observer (mMessageReceiver) to receive Intents
+        // with actions named "custom-event-name".
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                mMessageReceiver, new IntentFilter("custom-event-name"));
+        super.onResume();
     }
 
     public void button(View view) {
