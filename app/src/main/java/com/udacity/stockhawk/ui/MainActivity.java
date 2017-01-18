@@ -76,16 +76,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setRefreshing(true);
 
-//        //LocalBroadcast Management
-//        fab.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                // TODO Auto-generated method stub
-//                //Register MessageService in Manifest to work
-//                startService(new Intent(MainActivity.this, MessageService.class));
-//            }
-//        });
         LocalBroadcastManager.getInstance(this).registerReceiver(
                 mMessageReceiver, new IntentFilter("custom-event-name"));
 
@@ -152,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             String message = intent.getStringExtra("message");
             Timber.d("receiver _ Got message: " + message);
             Toast.makeText(MainActivity.this,message,Toast.LENGTH_SHORT).show();
+
         }
     };
 
