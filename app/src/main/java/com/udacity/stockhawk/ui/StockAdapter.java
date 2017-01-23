@@ -70,6 +70,7 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
 
 
         holder.symbol.setText(cursor.getString(Contract.Quote.POSITION_SYMBOL));
+        holder.name.setText(cursor.getString(Contract.Quote.POSITION_NAME));
         holder.price.setText(dollarFormat.format(cursor.getFloat(Contract.Quote.POSITION_PRICE)));
 
 
@@ -113,6 +114,9 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
 
         @BindView(R.id.symbol)
         TextView symbol;
+
+        @BindView(R.id.stock_name)
+        TextView name;
 
         @BindView(R.id.price)
         TextView price;

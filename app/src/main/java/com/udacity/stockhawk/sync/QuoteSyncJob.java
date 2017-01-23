@@ -8,8 +8,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
@@ -38,7 +41,7 @@ public final class QuoteSyncJob {
     private static final int INITIAL_BACKOFF = 10000;
     private static final int PERIODIC_ID = 1;
 
-    static void getQuotes(Context context) {
+    static void getQuotes(final Context context) {
 
         Timber.d("Running sync job");
 
@@ -67,7 +70,7 @@ public final class QuoteSyncJob {
             ArrayList<ContentValues> quoteCVs = new ArrayList<>();
 
             while (iterator.hasNext()) {
-                String symbol = iterator.next();
+                final String symbol = iterator.next();
 
                 Stock stock = quotes.get(symbol);
 
@@ -84,8 +87,15 @@ public final class QuoteSyncJob {
                     //send the message to main activity via local broadcast
                     //sendMessage(context, symbol);
 
-                    context.startService(new Intent(context, MessageService.class).putExtra("symbol",symbol));
+                    //context.startService(new Intent(context, MessageService.class).putExtra("symbol",symbol));
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
 
+                        @Override
+                        public void run() {
+
+                            Toast.makeText(context,"Stock Symbol: "+symbol+" doesn't exist!",Toast.LENGTH_LONG).show();
+                        }
+                    });
                     PrefUtils.removeStock(context, symbol);
 
                 } else {

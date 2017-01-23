@@ -22,8 +22,8 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".sync.MessageService"
-            android:exported="false"/>
+        <!--<service android:name=".sync.MessageService"-->
+            <!--android:exported="false"/>-->
 
         <service
             android:name=".sync.QuoteIntentService"
@@ -48,6 +48,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.udacity.stockhawk.ui.MainActivity" />
         </activity>
+
+        <!-- Detail Widget -->
+        <receiver
+            android:name=".widget.StockWidgetProvider"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.STOCKWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/stock_widget" />
+        </receiver>
+
     </application>
 
 </manifest>
