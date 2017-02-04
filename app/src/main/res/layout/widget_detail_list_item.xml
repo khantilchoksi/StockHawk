@@ -28,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:gravity="left|center_vertical"
+                android:textColor="@color/primary_text"
                 tools:text="GOOG" />
 
 
@@ -36,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/secondary_text"
                 tools:text="Google Inc., USA"/>
         </LinearLayout>
 
@@ -59,6 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10sp"
+                android:textColor="@color/primary_text"
                 tools:text="1000.00" />
 
             <TextView
