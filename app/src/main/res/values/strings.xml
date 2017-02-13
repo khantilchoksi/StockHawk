@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/tools">
     <string name="app_name">Stock Hawk</string>
 
     <string name="pref_stocks_initialized_key" translatable="false">initialized</string>
@@ -9,11 +9,11 @@
 
 
     <string name="pref_display_mode_title">Display Mode</string>
-    <string name="pref_display_mode_key">displayMode</string>
+    <string name="pref_display_mode_key" translatable="false">displayMode</string>
     <string name="pref_display_mode_default">@string/pref_display_mode_percentage_key</string>
 
-    <string name="pref_display_mode_absolute_key">absolute</string>
-    <string name="pref_display_mode_percentage_key">percentage</string>
+    <string name="pref_display_mode_absolute_key" translatable="false">absolute</string>
+    <string name="pref_display_mode_percentage_key" translatable="false">percentage</string>
 
     <string name="default_stocks_yahoo">YHOO</string>
     <string name="default_stocks_apple">AAPL</string>
@@ -39,5 +39,8 @@
     <string name="toast_no_connectivity">Will refresh when network available.</string>
 
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="addStockFloatingActionButton">Add Stock</string>
 
+    <string name="stock_name_content_descirption"> Stock: <xliff:g id="condition">%1$s</xliff:g></string>
+    <string name="stock_price_content_descirption"> Stock is  <xliff:g id="changeUpDown">%1$s</xliff:g> by dollars <xliff:g id="change">%2$s</xliff:g></string>
 </resources>

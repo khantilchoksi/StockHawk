@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;
@@ -116,6 +117,7 @@ public class StockWidgetRemoteViewsService extends RemoteViewsService{
 
                 String symbol = data.getString(Contract.Quote.POSITION_SYMBOL);
                 String stockName = data.getString(Contract.Quote.POSITION_NAME);
+                String history = data.getString(Contract.Quote.POSITION_HISTORY);
                 String price = dollarFormat.format(data.getFloat(Contract.Quote.POSITION_PRICE));
                 float rawAbsoluteChange = data.getFloat(Contract.Quote.POSITION_ABSOLUTE_CHANGE);
                 float percentageChange = data.getFloat(Contract.Quote.POSITION_PERCENTAGE_CHANGE);
@@ -147,7 +149,11 @@ public class StockWidgetRemoteViewsService extends RemoteViewsService{
 
                 final Intent fillInIntent = new Intent();
 
-                fillInIntent.setData(Contract.Quote.uri);
+                Bundle extras = new Bundle();
+                extras.putString("SYMBOL",symbol);
+                extras.putString("HISTORY", history);
+                extras.putString("NAME", stockName);
+                fillInIntent.putExtras(extras);
 
                 views.setOnClickFillInIntent(R.id.widget_list_item, fillInIntent);
 

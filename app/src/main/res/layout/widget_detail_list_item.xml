@@ -12,7 +12,9 @@
         android:gravity="center_vertical"
         android:minHeight="?android:attr/listPreferredItemHeight"
         android:paddingLeft="@dimen/abc_list_item_padding_horizontal_material"
+        android:paddingStart="@dimen/abc_list_item_padding_horizontal_material"
         android:paddingRight="@dimen/abc_list_item_padding_horizontal_material"
+        android:paddingEnd="@dimen/abc_list_item_padding_horizontal_material"
         android:orientation="horizontal">
 
 
@@ -27,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:gravity="left|center_vertical"
+                android:gravity="start|center_vertical"
                 android:textColor="@color/primary_text"
                 tools:text="GOOG" />
 
@@ -53,7 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="right">
+            android:gravity="end">
 
             <TextView
                 android:id="@+id/price"
@@ -61,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10sp"
+                android:layout_marginEnd="10sp"
                 android:textColor="@color/primary_text"
                 tools:text="1000.00" />
 
@@ -71,7 +74,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/percent_change_pill_green"
                 android:paddingLeft="3dp"
+                android:paddingStart="3dp"
                 android:paddingRight="3dp"
+                android:paddingEnd="3dp"
                 tools:text="100%" />
         </LinearLayout>
 
