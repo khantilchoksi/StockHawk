@@ -1,9 +1,7 @@
 package com.udacity.stockhawk.ui;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -12,7 +10,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -170,7 +167,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     void addStock(String symbol) {
         if (symbol != null && !symbol.isEmpty()) {
-
+            if(!symbol.matches("[a-zA-Z]+")){
+                //symnol string doesn't contain only alphabets
+                String message = getString(R.string.toast_stock_input_invalid_symbol, symbol);
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+                return;
+            } else if(PrefUtils.stockExists(this,symbol.toUpperCase())){
+                //Stock symbol already exists
+                String message = getString(R.string.toast_stock_already_exists, symbol);
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+                return;
+            }
             if (networkUp()) {
                 swipeRefreshLayout.setRefreshing(true);
             } else {

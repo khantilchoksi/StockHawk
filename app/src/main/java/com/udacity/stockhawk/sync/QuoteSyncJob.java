@@ -14,6 +14,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
 
@@ -92,8 +93,8 @@ public final class QuoteSyncJob {
 
                         @Override
                         public void run() {
-
-                            Toast.makeText(context,"Stock Symbol: "+symbol+" doesn't exist!",Toast.LENGTH_LONG).show();
+                            String message = context.getString(R.string.toast_stock_symbol_doesnot_exist, symbol);
+                            Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                         }
                     });
                     PrefUtils.removeStock(context, symbol);
@@ -125,9 +126,6 @@ public final class QuoteSyncJob {
                     quoteCV.put(Contract.Quote.COLUMN_PRICE, price);
                     quoteCV.put(Contract.Quote.COLUMN_PERCENTAGE_CHANGE, percentChange);
                     quoteCV.put(Contract.Quote.COLUMN_ABSOLUTE_CHANGE, change);
-
-                    //Log.d("Khantil",historyBuilder.toString());
-
                     quoteCV.put(Contract.Quote.COLUMN_HISTORY, historyBuilder.toString());
 
                     quoteCVs.add(quoteCV);

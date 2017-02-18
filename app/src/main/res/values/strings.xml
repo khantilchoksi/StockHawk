@@ -35,6 +35,10 @@
 
     <string name ="error_no_stocks_at_all">No stocks added!</string>
 
+    <string name="toast_stock_input_invalid_symbol">Symbol %s is not valid. Please enter a valid symbol.</string>
+    <string name="toast_stock_already_exists">Stock symbol %s already exists.</string>
+    <string name="toast_stock_symbol_doesnot_exist">Stock symbol %s does not exist. Please enter a valid symbol.</string>
+
     <string name="toast_stock_added_no_connectivity">Symbol %s added. Will refresh when network available.</string>
     <string name="toast_no_connectivity">Will refresh when network available.</string>
 

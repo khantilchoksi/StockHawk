@@ -37,6 +37,11 @@ public final class PrefUtils {
 
     }
 
+    public static boolean stockExists(Context context,String symbol){
+        Set<String> stocks = getStocks(context);
+        return stocks.contains(symbol);
+    }
+
     public static void editStockPref(Context context, String symbol, Boolean add) {
         String key = context.getString(R.string.pref_stocks_key);
         Set<String> stocks = getStocks(context);
